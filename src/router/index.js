@@ -8,7 +8,23 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    children: [
+      {
+        path: 'ProcessingCenter',
+        name: 'ProcessingCenter',
+        component: () => import ('@/views/ProcessingCenterView.vue')
+      },
+      {
+        path: "OptionOne",
+        component: () => import("@/views/OptionOneView.vue")
+      },
+      // * 路由放在最后
+      {
+        path: "*",
+        component: () => import('@/views/NotFount.vue')
+      }
+    ]
   },
   {
     path: '/about',
@@ -19,7 +35,7 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
     }
-  }
+  },
 ]
 
 const router = new VueRouter({
